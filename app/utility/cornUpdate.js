@@ -3,7 +3,7 @@ import Model from "../model/quizModel.js";
 
 const script = nodeCorn.schedule("*/30 * * * * *", async () => {
   try {
-    const now = new Date();
+    const now = new Date().toUTCString();
     
     const activeQuizzes = await Model.find({
       startDate: { $lte: now },
