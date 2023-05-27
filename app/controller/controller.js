@@ -1,5 +1,6 @@
 import Model from "../model/quizModel.js";
 import { getCache, setCache } from "../utility/cache.js";
+import moment from "moment/moment.js";
 
 let CACHE_TIME = 30000;
 
@@ -7,7 +8,12 @@ let CACHE_TIME = 30000;
 
 const createQuiz = async (req, res) => {
     try {
-      const { question, options, rightAnswer, startDate, endDate } = req.body;
+      let { question, options, rightAnswer, startDate, endDate } = req.body;
+
+      startDate = moment(startDate).utc().format();
+      endDate = moment(endDate).utc().format();
+
+      console.log(startDate, endDate);
 
       const quiz = new Model({
         question,
