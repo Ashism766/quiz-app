@@ -5,17 +5,51 @@ This is a RESTful API that provides endpoints for managing quizzes.
 ## Installation
 
 1. Clone the repository.
+```sh
+  git clone https://github.com/Ashism766/quiz-app.git
+```
 2. Install dependencies by running `npm install`.
+```sh
+  cd quizz-app
+  npm i 
+```
 3. Set up the required environment variables (e.g., database connection) in a `.env` file.
-4. Start the server by running `npm start`.
+   Add mongodb uri inside .env file, `example` below
+```sh
+  MONGO_URI  = 'mongodb://localhost:27017/quizapp'
+```
+4. Start the server by running `npm `.
+```sh
+  npm start
+```
+
+## Directory Structure
+```bash
+.
+├── Readme.md
+├── app
+│   ├── controller
+│   │   └── controller.js
+│   ├── model
+│   │   └── quizModel.js
+│   ├── routes
+│   │   └── quizRoutes.js
+│   └── utility
+│       ├── cache.js
+│       ├── cornUpdate.js
+│       └── requestLimit.js
+├── main.js
+├── package-lock.json
+└── package.json
+```
 
 ## Endpoints
 
 ### Create a Quiz
-
 Create a new quiz.
-
-- **Endpoint:** `POST /quizzes`
+```https
+ POST /quizzes
+ ```
 - **Request Body:**
   - `question` (string, required): The question for the quiz.
   - `options` (array, required): An array of options for the quiz.
@@ -24,10 +58,10 @@ Create a new quiz.
   - `endDate` (date, required): The end date of the quiz.
 
 ### Get Active Quizzes
-
 Retrieve the list of active quizzes.
-
-- **Endpoint:** `GET /quizzes/active`
+```https
+GET /quizzes/active
+```
 - **Response:** An array of active quizzes.
   - `question` (string): The question for the quiz.
   - `options` (array): An array of options for the quiz.
@@ -38,8 +72,9 @@ Retrieve the list of active quizzes.
 ### Get Quiz Result
 
 Retrieve the result of a specific quiz.
-
-- **Endpoint:** `GET /quizzes/:id/result`
+```https
+`GET /quizzes/:id/result`
+```
 - **Path Parameters:**
   - `id` (string, required): The ID of the quiz.
 - **Response:** The result of the quiz.
@@ -47,8 +82,9 @@ Retrieve the result of a specific quiz.
 ### Get All Quizzes
 
 Retrieve all quizzes.
-
-- **Endpoint:** `GET /quizzes/all`
+```https
+GET /quizzes/all
+```
 - **Response:** An array of all quizzes.
   - `question` (string): The question for the quiz.
   - `options` (array): An array of options for the quiz.
