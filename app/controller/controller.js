@@ -1,6 +1,7 @@
 import Model from "../model/quizModel.js";
 import { getCache, setCache } from "../utility/cache.js";
-import moment from "moment/moment.js";
+import moment from "moment-timezone";
+
 
 let CACHE_TIME = 30000;
 
@@ -43,7 +44,7 @@ const createQuiz = async (req, res) => {
     if( cachedData != null) { return res.json(cachedData); }
 
 
-    const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const now = moment().tz('Asia/Kolkata').toDate();
 
       const activeQuiz = await Model.find({
         startDate: { $lte: now },

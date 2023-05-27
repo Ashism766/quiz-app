@@ -1,10 +1,12 @@
 import nodeCorn from "node-cron";
 import Model from "../model/quizModel.js";
+import moment from "moment-timezone";
+
 
 const script = nodeCorn.schedule("*/30 * * * * *", async () => {
   try {
     
-    const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const now = moment().tz('Asia/Kolkata').toDate();
 
     const activeQuizzes = await Model.find({
       startDate: { $lte: now },
