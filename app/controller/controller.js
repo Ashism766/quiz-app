@@ -43,7 +43,7 @@ const createQuiz = async (req, res) => {
     if( cachedData != null) { return res.json(cachedData); }
 
 
-      const now = new Date().toUTCString(); //
+    const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
       const activeQuiz = await Model.find({
         startDate: { $lte: now },
