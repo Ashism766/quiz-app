@@ -43,7 +43,8 @@ const createQuiz = async (req, res) => {
     if( cachedData != null) { return res.json(cachedData); }
 
 
-      const now = new Date();
+      const now = new Date().toUTCString(); //
+
       const activeQuiz = await Model.find({
         startDate: { $lte: now },
         endDate: { $gte: now }
