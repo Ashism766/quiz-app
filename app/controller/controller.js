@@ -11,8 +11,6 @@ const createQuiz = async (req, res) => {
     try {
       let { question, options, rightAnswer, startDate, endDate } = req.body;
 
-      startDate = new Date(startDate);
-      endDate = new Date(endDate);
 
       console.log(startDate, endDate);
 
@@ -20,8 +18,8 @@ const createQuiz = async (req, res) => {
         question,
         options,
         rightAnswer,
-        startDate:startDate,
-        endDate: endDate,
+        startDate,
+        endDate,
         status:'inactive'
       });
   
@@ -44,14 +42,14 @@ const createQuiz = async (req, res) => {
     if( cachedData != null) { return res.json(cachedData); }
 
 
-    const now = moment().tz('Asia/Kolkata').toDate();
+    const now = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
 
       const activeQuiz = await Model.find({
         startDate: { $lte: now },
         endDate: { $gte: now }
       });
       
-      console.log("active quize ",activeQuiz);
+      
       if (activeQuiz == null | activeQuiz.length === 0) {
         res.status(404).json({ message: 'No active quiz found' });
       } else 

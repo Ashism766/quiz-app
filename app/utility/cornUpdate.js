@@ -6,7 +6,9 @@ import moment from "moment-timezone";
 const script = nodeCorn.schedule("*/30 * * * * *", async () => {
   try {
     
-    const now = moment().tz('Asia/Kolkata').toDate();
+    // let now = moment().tz('Asia/Kolkata').toDate();
+    const now = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+    // console.log(now);
 
     const activeQuizzes = await Model.find({
       startDate: { $lte: now },
