@@ -11,8 +11,8 @@ const createQuiz = async (req, res) => {
     try {
       let { question, options, rightAnswer, startDate, endDate } = req.body;
 
-      startDate = moment(startDate).utc().format();
-      endDate = moment(endDate).utc().format();
+      startDate = new Date(startDate);
+      endDate = new Date(endDate);
 
       console.log(startDate, endDate);
 
@@ -20,9 +20,9 @@ const createQuiz = async (req, res) => {
         question,
         options,
         rightAnswer,
-        startDate,
-        endDate,
-        status: 'inactive'
+        startDate:startDate,
+        endDate: endDate,
+        status:'inactive'
       });
   
       const createdQuiz = await quiz.save();
