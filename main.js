@@ -21,24 +21,28 @@ app.use((err, req, res) => {
 
 
 
-
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, w: 'majority' })
-  .then(() => {
-    console.log('Connected to database');
-  })
-  .catch((error) => {
-    console.error('Error connecting to database:', error);
-  });
-
-
-
-
-
 app.get("/", (req, res)=>{
     res.send({"It's working": "yes"})
 })
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
+
+
+
+const server = async () =>{
+  await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, w: 'majority' })
+    .then(() => {
+      console.log('Connected to database');
+    })
+    .catch((error) => {
+      console.error('Error connecting to database:', error);
+    });
+
+
+
+  app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
+}
+
+server();
