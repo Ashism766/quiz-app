@@ -47,15 +47,26 @@ This is a RESTful API that provides endpoints for managing quizzes.
 
 ### Create a Quiz
 Create a new quiz.
-```https
+```http
  POST /quizzes
  ```
 - **Request Body:**
   - `question` (string, required): The question for the quiz.
   - `options` (array, required): An array of options for the quiz.
-  - `rightAnswer` (number, required): The index of the correct answer in the options array.
-  - `startDate` (date, required): The start date of the quiz.
-  - `endDate` (date, required): The end date of the quiz.
+  - `rightAnswer` (number, required): The index of the correct answer in the options array.`between 1 to 4`
+  - `startDate` (date, required): The start date of the quiz. `YYYY-MM-DDTHH:MM:SS`
+  - `endDate` (date, required): The end date of the quiz.  `YYYY-MM-DDTHH:MM:SS`
+
+#### Example of Post request Body
+```json
+{
+  "question": "what's the name of national animal of India?",
+  "option": ["bengal tiger", "peecock", "dog", "lion"],
+  "rightAnswer": 1,
+  "startDate": "2023-05-28T17:50:02",
+  "endDate": "2023-05-28T17:55:02",
+}
+```
 
 ### Get Active Quizzes
 Retrieve the list of active quizzes.
